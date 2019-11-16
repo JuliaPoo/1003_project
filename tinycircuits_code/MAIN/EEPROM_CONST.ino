@@ -20,7 +20,7 @@ typedef struct {
   unsigned char EXP;
   unsigned char LEVEL;
   
-} GAME_VARIABLES;
+}GAME_VARIABLES;
 
 
 // ###########################################
