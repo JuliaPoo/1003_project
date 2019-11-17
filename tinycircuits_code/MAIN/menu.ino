@@ -2,9 +2,9 @@
 // ####### MENU BAR #######
 // ########################
 
-#define N_OPTIONS 5 // Number of options on the menu
-#define BACKGROUND 219
-#define SELECTED_BACKGROUND 182
+#define N_OPTIONS 5               // Number of options on the menu
+#define BACKGROUND 219            // Background colour of unselected item
+#define SELECTED_BACKGROUND 182   // Background colour of selected item
 
 void Menu_Loop(){
   unsigned char is_done = false;
@@ -18,7 +18,7 @@ void Menu_Loop(){
     
     // Moving cursor
     if (is_clicked(TSButtonUpperLeft)){
-      y = (N_OPTIONS + y - 1) % N_OPTIONS; // Essentially y -= 1 but y is always positive
+      y = (N_OPTIONS + y - 1) % N_OPTIONS; // Essentially y = (y-1) % N_OPTIONS but y is always positive
       Draw_Menu(y);
     }
     if (is_clicked(TSButtonLowerLeft)){

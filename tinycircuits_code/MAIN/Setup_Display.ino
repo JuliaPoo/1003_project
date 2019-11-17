@@ -12,7 +12,6 @@ void Setup_Display_Loop(){
 
   bool is_done = false;
   
-  // Requires a loop because this is under Setup and not Loop
   while (!is_done){
     if (is_clicked(TSButtonUpperLeft)) {
       // Confirmation:
