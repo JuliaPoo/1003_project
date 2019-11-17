@@ -29,11 +29,21 @@ void setup (){
 
 void loop(){
 
+  // Draws game screen including the hamburger menu (avoid flickering at the expense of messy code)
   if (!PAUSE_GAME){
     Display_Game_Screen();
   }
 
-  
+  // Checks to enter menu loop
+  if (is_clicked(TSButtonUpperLeft)){
+    /*
+    delay(200);
+    PAUSE_GAME = true;
+    //Menu_Loop();
+    PAUSE_GAME = false;
+    */
+    Serial.println("is clicked");
+  }
   
   delay(50); // Whole app loop will have max fps=20
 }
