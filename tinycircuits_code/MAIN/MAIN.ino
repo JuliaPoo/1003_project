@@ -6,7 +6,6 @@
 #include "const.h"
 
 TinyScreen display = TinyScreen(0);
-unsigned char PAUSE_GAME = 0; // set to 1 to pause game screen
 
 void setup (){
   
@@ -16,7 +15,7 @@ void setup (){
   display.begin();
 
   // Set font
-  display.fontColor(TS_8b_White,TS_8b_Black);
+  display.fontColor(TS_8b_White, TS_8b_Black);
   display.setFont(thinPixel7_10ptFontInfo);
 
   // Setup EEPROM
@@ -30,19 +29,11 @@ void setup (){
 void loop(){
 
   // Draws game screen including the hamburger menu (avoid flickering at the expense of messy code)
-  if (!PAUSE_GAME){
-    Display_Game_Screen();
-  }
+  Display_Game_Screen();
 
   // Checks to enter menu loop
   if (is_clicked(TSButtonUpperLeft)){
-    /*
-    delay(200);
-    PAUSE_GAME = true;
-    //Menu_Loop();
-    PAUSE_GAME = false;
-    */
-    Serial.println("is clicked");
+    Menu_Loop();
   }
   
   delay(50); // Whole app loop will have max fps=20

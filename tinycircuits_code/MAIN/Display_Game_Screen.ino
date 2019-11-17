@@ -54,7 +54,7 @@ void Display_Game_Screen(){
     DrawSprite(CUTIE_ARR[CUTIE_FRAME], CUTIE_X, CUTIE_Y, Rx/2 - 3*CUTIE_X/2, Ry/2 - CUTIE_Y/2 + 10, LINE_N);
 
     //Draw menu
-    DrawSprite(HAMBURGER_MENU, HAM_X, HAM_Y, 3, 10, LINE_N);
+    DrawSprite(HAMBURGER_MENU, HAM_X, HAM_Y, 5, 10, LINE_N);
 
     display.writeBuffer(LINEBUFFER, Rx);
   }
