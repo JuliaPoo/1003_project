@@ -1,3 +1,7 @@
+// ###########################################
+// ####### ALL EEPROM OPERATIONS #############
+// ###########################################
+
 #include <EEPROM.h>
 #include <string.h>
 #include "const.h"
@@ -5,6 +9,8 @@
 // ###########################################
 // ####### VARIABLES TO STORE IN EEPROM ######
 // ###########################################
+
+unsigned char IS_FIRST; // If 0: store default values. Else continue with values in EEPROM
 
 typedef struct {
 
@@ -27,7 +33,8 @@ typedef struct {
 // ######## POINTERS IN EEPROM ###############
 // ###########################################
 
-const int PREFERENCES_PTR = 0;
+const int IS_FIRST_PTR = 0;
+const int PREFERENCES_PTR = IS_FIRST_PTR + sizeof(IS_FIRST);
 const int TODO_LIST_PTR = PREFERENCES_PTR + sizeof(PREFERENCES);
 const int GAME_VARIABLES_PTR = TODO_LIST_PTR + (LEN_TODO + 1) * N_TODO;
 
@@ -36,7 +43,6 @@ const int GAME_VARIABLES_PTR = TODO_LIST_PTR + (LEN_TODO + 1) * N_TODO;
 // ##########################################
 
 // Setup on the first setup
-bool is_first = true;
 
 void clear_EEPROM(){
   // Sets all values in EEPROM to 0
@@ -52,7 +58,7 @@ void FirstSetup(){
   PREFERENCES pref;
   GAME_VARIABLES game;
 
-  pref.BRIGHTNESS = 10;
+  pref.BRIGHTNESS = 15;
   pref.some_other_value = 15;
   strcpy(TODO_LIST[0], "Sample TODO #1");
   strcpy(TODO_LIST[1], "Sample TODO #2");
@@ -67,17 +73,21 @@ void FirstSetup(){
   WriteGameVariables(game.EXP, 0);
   WriteGameVariables(game.LEVEL, 1);
   
-  is_first = false;
+  WriteIsFirst(1);
 }
 
 // Setup
 void Setup_EEPROM(){
-  if (is_first) FirstSetup();
+  if (GetIsFirst() == 0) FirstSetup();
 }
 
 // ##########################################
 // ######## GET VARIABLES IN EEPROM #########
 // ##########################################
+
+unsigned char GetIsFirst(){
+  return EEPROM.read(IS_FIRST_PTR);
+}
 
 unsigned char GetPreferences(unsigned char pos){
   // pos=0: gets brightness
@@ -109,6 +119,10 @@ unsigned char GetGameVariables(unsigned char pos){
 // ##########################################
 // ######## WRITE VARIABLES TO EEPROM #######
 // ##########################################
+
+void WriteIsFirst(unsigned char* input){
+  EEPROM.put(IS_FIRST_PTR, input);
+}
 
 void WriteTodo(char* input, unsigned char index){
   // Writes todo string into EEPROM
