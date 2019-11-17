@@ -17,6 +17,10 @@ void Setup_Display_Loop(){
       // Confirmation:
       if (reset_confirmation()){
         WriteIsFirst(0); // Set flag to reset EEPROM
+        display.clearScreen();
+        unsigned char width = display.getPrintWidth("Resetting...");
+        display.setCursor(48-(width/2),Ry/2 - 5);
+        display.print("Resetting...");
       }
       is_done = true;
     }
@@ -25,11 +29,6 @@ void Setup_Display_Loop(){
       is_done = true;
     }
   }
-
-  display.clearScreen();
-  unsigned char width=display.getPrintWidth("loading...");
-  display.setCursor(48-(width/2),Ry/2 - 5);
-  display.print("loading...");
 }
 
 bool reset_confirmation(){

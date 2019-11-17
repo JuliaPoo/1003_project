@@ -3,6 +3,7 @@
 // ########################
 
 #define N_OPTIONS 5               // Number of options on the menu
+
 #define BACKGROUND 219            // Background colour of unselected item
 #define SELECTED_BACKGROUND 182   // Background colour of selected item
 #define SHADOW 111                // Shadow of menu
@@ -100,5 +101,17 @@ void ExecuteOption(unsigned char y){
 void ToDoList_Loop(){}
 void Preference_Loop(){}
 void Achievements_Loop(){}
-void Reset_Loop(){}
+
+void Reset_Loop(){
+  display.fontColor(TS_8b_White, TS_8b_Black);
+  if (reset_confirmation()){
+    WriteIsFirst(0); // Set flag to reset EEPROM
+    display.clearScreen();
+    unsigned char width = display.getPrintWidth("Resetting...");
+    display.setCursor(48-(width/2),Ry/2 - 5);
+    display.print("Resetting...");
+    Setup_EEPROM();
+  }
+}
+
 void Back(){}
