@@ -5,6 +5,14 @@
 #define N_OPTIONS 5               // Number of options on the menu
 #define BACKGROUND 219            // Background colour of unselected item
 #define SELECTED_BACKGROUND 182   // Background colour of selected item
+#define SHADOW 111                // Shadow of menu
+
+// Set display params
+#define rec_h 10                  // Height of each option
+#define rec_w 66                  // Width of each option
+#define left_pad 3                // padding left of text
+#define menu_left_pad 5           // padding left of menu
+#define menu_top_pad 5            // padding top of menu
 
 void Menu_Loop(){
   unsigned char is_done = false;
@@ -12,6 +20,12 @@ void Menu_Loop(){
   // Initialise cursor
   unsigned char y = 0;
   display.fontColor(TS_8b_Black, BACKGROUND);
+  display.drawRect(menu_left_pad + 2,
+                   menu_top_pad + 2,
+                   rec_w, 
+                   rec_h * N_OPTIONS, 
+                   1, 
+                   SHADOW); // Draws shadow cuz it looks awesome
 
   Draw_Menu(y);
   while (!is_done){
@@ -41,13 +55,6 @@ void Draw_Menu(unsigned char y){
 
   // If need be, can be more memory efficient at the expense of cancer
   char MenuOptions[N_OPTIONS][16] = {"To Do List", "Preferences", "Achievements", "Reset", "Back"};
-
-  // Set parameters
-  unsigned char rec_h = 10;
-  unsigned char rec_w = 66;
-  unsigned char left_pad = 3;
-  unsigned char menu_left_pad = 5;
-  unsigned char menu_top_pad = 5;
   
   unsigned char i;
   char option[15];
