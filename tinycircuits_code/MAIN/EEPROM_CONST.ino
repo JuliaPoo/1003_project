@@ -19,8 +19,6 @@ typedef struct {
   
 }PREFERENCES;
 
-char TODO_LIST[N_TODO][LEN_TODO + 1];
-
 typedef struct {
 
   unsigned char EXP;
@@ -34,7 +32,7 @@ typedef struct {
 // ###########################################
 
 const int IS_FIRST_PTR = 0;
-const int PREFERENCES_PTR = IS_FIRST_PTR + sizeof(IS_FIRST);
+const int PREFERENCES_PTR = IS_FIRST_PTR + 2; // +2 instead of +1 because memory is wordsized. I can fit another flag before this because 1 byte is unused.
 const int TODO_LIST_PTR = PREFERENCES_PTR + sizeof(PREFERENCES);
 const int GAME_VARIABLES_PTR = TODO_LIST_PTR + (LEN_TODO + 1) * N_TODO;
 
@@ -52,6 +50,7 @@ void clear_EEPROM(){
 }
 
 void FirstSetup(){
+  Serial.println("default");
   clear_EEPROM();
   
   // DEFAULT VALUES
@@ -60,16 +59,14 @@ void FirstSetup(){
 
   pref.BRIGHTNESS = 15;
   pref.some_other_value = 15;
-  strcpy(TODO_LIST[0], "Sample TODO #1");
-  strcpy(TODO_LIST[1], "Sample TODO #2");
   game.EXP = 0;
   game.LEVEL = 1;
 
   // Set default values
   WritePreferences(pref.BRIGHTNESS, 0);
   WritePreferences(pref.some_other_value, 1);
-  WriteTodo(TODO_LIST[0], 0);
-  WriteTodo(TODO_LIST[1], 1);
+  WriteTodo("Sample TODO #1", 0);
+  WriteTodo("Sample TODO #2", 1);
   WriteGameVariables(game.EXP, 0);
   WriteGameVariables(game.LEVEL, 1);
   
@@ -93,7 +90,6 @@ unsigned char GetPreferences(unsigned char pos){
   // pos=0: gets brightness
   // pos=1: gets some_other_value
   // Returns the value in preference
-
   return EEPROM.read(pos + PREFERENCES_PTR);
 }
 
