@@ -1,0 +1,44 @@
+variables -------------------------
+TASKS_STORAGE_MAX - maximum number of task lines stored in char array
+LINES_LENGTH - length per line in char array
+Char array is the product of the above.
+
+ELEMENTS_PER_PAGE - currently at 4 due to font size.
+New ! -
+add_task_to_tasklist("hello");
+// adds task "hello" into last line of tasklist
+
+tasklist auto arranges
+pressing up on first line goes to last line,
+pressing down on last line goes to first line.
+
+selecting yes or no uses both buttons.
+memory usage cut down by ~ 150 Bytes
+program storage usage up by ~ 700 Bytes
+
+--------------
+
+BUTTON_REPEAT_DELAY - how fast the button repeats when held down. Lower
+than 80 leads to double inputs cuz the button sucks
+
+CLOCK_RES - timer resolution of the tinycircuits cpu
+DISPLAY_BOX_CHAR_LIMIT - number of chars before the line shows ...
+limited to 13 due to font size.
+
+functions -------------------
+clear - just a easier display.clearscreen
+cursor_goto - just an easier display.setCursor
+print_line print_line_highlight print_dark_green print_dark_green_bgyes print_dark_green_bgno- different colors 
+arrow_up_normal arrow_down_normal -> the arrows of the scroll bar
+out_box - draws a red box and an x
+sel_box - draws a green box and a circle
+init_UI - to clear and colour the scroll bar and arrows, selection buttons and title. the static elements
+show_lines - show lines inside the changing box within the menu, changes colour of font if selector is on that line
+init_tasklist - set first char of each line to null byte in char array tasklist
+add_task_to_tasklist - adds a task to the last line of tasklist
+update_selector - doubles to colour the changing portion of the menu as well as the highlighter.
+page_num - changes and prints the page number element at the bottom of the menu
+popup_buttons - updates the yes or no in the confirm delete popup box
+open_popupbox - a loop for the inner menu, breaks when exit button (upper right) pressed or selector (lower right) on yes 
+
+UI - the loop to control all functions. breaks when exit button is pressed in the main menu
