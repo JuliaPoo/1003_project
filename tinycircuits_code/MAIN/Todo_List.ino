@@ -1,13 +1,3 @@
-#include <TinyScreen.h>
-#include <Wire.h>
-#include <SPI.h>
-#include "const.h"
-
-// added functions
-#include <Time.h>
-#include <stdlib.h>
-#include <string.h>
-
 #define TASKS_STORAGE_MAX N_TODO
 #define LINES_LENGTH LEN_TODO+1
 #define ELEMENTS_PER_PAGE 4 // Starting from 0: 0,1,2,3,4 (5 elements total)
@@ -18,8 +8,6 @@
 #define NORMAL_TEXT_BG 219
 #define SELECTED_TEXT_BG 182
 #define POPUP_BACKGROUND_COL 242
-
-TinyScreen display = TinyScreen(TinyScreenDefault);
 
 void slice_str(char * buff, const char * str, size_t start, size_t end){
   size_t j = 0;
@@ -246,35 +234,6 @@ void open_popupbox(int select_index){
   }
 }
 
-void TEMP_TASKLIST(){
-  // Hardcoded tasks
-  add_task_to_tasklist("Hello world!");
-  add_task_to_tasklist("Hello world");
-  add_task_to_tasklist("A very long string string!!!!!");
-  add_task_to_tasklist("Lorem Ipsum");
-  add_task_to_tasklist("Dolor Sit Amet");
-  add_task_to_tasklist("Let them");
-  add_task_to_tasklist("Eat cake");
-  add_task_to_tasklist("just a test of");
-  add_task_to_tasklist("1234567890-=");
-}
-
-void UI(){
-  bool is_done = false;
-  short int pos_in_page = 0;
-  short int selector = 0;
-  init_UI();  
-
-  TEMP_TASKLIST();
-      
-  display_menu(selector, pos_in_page);
-
-  while (!is_done){
-    animate_text_loop(selector, pos_in_page);
-    button_controller_loop(&selector, &pos_in_page);
-  }
-}
-
 void animate_text_loop(short int selector, short int pos_in_page){
   bool is_done = false;
   bool is_truncated = true;
@@ -342,22 +301,27 @@ void button_controller_loop(short int *selector, short int *pos_in_page){
       display_menu(*selector, *pos_in_page);
       is_done = true;
     }
+
+    if (display.getButtons(TSButtonUpperRight)){
+      is_done = true; // Pass handling to UI_Todo_Loop
+    }
     
   }
 }
 
+void UI_Todo_Loop(){
+  bool is_done = false;
+  short int pos_in_page = 0;
+  short int selector = 0;
+  init_UI();  
+      
+  display_menu(selector, pos_in_page);
 
-void setup(void) {
-  // put your setup code here, to run once:
-  Wire.begin();
-  display.begin();
-  display.setBrightness(15);  // 0 to 15 only
-  Serial.begin(9600);
-  FirstSetup();
-  
-}
+  while (!is_done){
+    animate_text_loop(selector, pos_in_page);
+    button_controller_loop(&selector, &pos_in_page);
 
-
-void loop() {
-  UI(); // draws the UI of the menu. launches a loop. when inside the loop and x is pressed, loop break.
+    // Exit Loop
+    if (is_clicked(TSButtonUpperRight)) is_done = true;
+  }
 }

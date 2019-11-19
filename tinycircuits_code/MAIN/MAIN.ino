@@ -3,6 +3,8 @@
 #include <TinyScreen.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <Time.h>
 #include "const.h"
 
 TinyScreen display = TinyScreen(0);

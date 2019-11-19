@@ -42,7 +42,7 @@ void Menu_Loop(){
     }
 
     // Selecting option
-    if (is_clicked(TSButtonUpperRight)){
+    if (is_clicked(TSButtonLowerRight)){
       ExecuteOption(y);
       is_done = true;
     }
@@ -98,7 +98,10 @@ void ExecuteOption(unsigned char y){
   else if (y == 4) Back();
 }
 
-void ToDoList_Loop(){}
+void ToDoList_Loop(){
+  UI_Todo_Loop(); // Launched To-do list
+}
+
 void Preference_Loop(){}
 void Achievements_Loop(){}
 

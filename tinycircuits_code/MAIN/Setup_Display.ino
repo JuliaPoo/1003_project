@@ -24,6 +24,7 @@ void Setup_Display_Loop(){
       }
       is_done = true;
     }
+    
     if (is_clicked(TSButtonLowerLeft)) {
       WriteIsFirst(1); // Set flag to continue from previous session
       is_done = true;
