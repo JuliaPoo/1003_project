@@ -67,6 +67,8 @@ void FirstSetup(){
   WritePreferences(pref.some_other_value, 1);
   WriteTodo("Sample TODO #1", 0);
   WriteTodo("Sample TODO #2", 1);
+  char temp[LEN_TODO] = "Testing a Really Long String";
+  WriteTodo(temp, 2);
   WriteGameVariables(game.EXP, 0);
   WriteGameVariables(game.LEVEL, 1);
   
