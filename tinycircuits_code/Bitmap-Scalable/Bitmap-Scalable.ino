@@ -63,7 +63,7 @@ const unsigned char GRASS[96*4] PROGMEM = {ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, AL
 //%%%% ENVIRON %%%%%%
 //%%%%%%%%%%%%%%%%%%%
 
-#define TIME_FRAME_LEN 60
+#define TIME_FRAME_LEN 200
 unsigned char TIME_FRAME = 0;
 
 //%%%%%%%%%%%%%%%%%%%
@@ -122,6 +122,10 @@ void SpritePosController(){
   }
 }
 
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%% GAME SETUP AND LOOP %%%%%%%
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 void setup() {
   Wire.begin();
   display.begin();
@@ -135,8 +139,13 @@ void loop() {
   FrameController();
   SpritePosController();
   DrawScreen();
+  delay(20);
   
 }
+
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%% DRAWING SCREEN %%%%%%%
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 void DrawScreen(){
   // Arrange sprite in increasing z-order
@@ -190,7 +199,7 @@ void DrawScreen(){
     if (LINE_N > Ry - 12) for (var = 0; var < Rx; var++) LINEBUFFER[var] = GROUND;
     DrawSprite(GRASS, GRASS_X, GRASS_Y, 
                0, 0, 0,
-               Rx/2, Ry-13, 
+               Rx/2 + KAHO_POS_X/10, Ry-13, 
                false, 
                LINE_N);
 
@@ -216,6 +225,8 @@ void DrawScreen(){
     // ----------------
     // --- OVERLAYS ---
     // ----------------
+
+    //if (LINE_N < 6+11 && LINE_N > 6) for (var = 4; var < 14; var++) LINEBUFFER[var] = 183;
     
     //Draw hamburger menu
     DrawSprite(HAMBURGER_MENU, HAM_X, HAM_Y,
@@ -239,6 +250,8 @@ void DrawSprite(long SpritePointer, unsigned char SpriteSize_X,  unsigned char S
   // SpritePointer is the pointer to the bitmap data (in progmem)
   // SpriteSize_X is the x-size of the bitmap
   // SpriteSize_Y is the y-size of the bitmap
+  // disp_x and disp_y is the displacement upon cropping (to the left and down)
+  // disp_x2 is the displacement upon cropping to the right (used when reflect is given)
   // x is the position to plot (left side coord)
   // y is the position to plot (bottom side coord)
   // reflect is whether to reflect along y axis
