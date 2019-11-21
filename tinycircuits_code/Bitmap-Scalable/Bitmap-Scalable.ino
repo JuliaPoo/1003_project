@@ -109,7 +109,7 @@ void FrameController(){
   if (is_idle) UpdateFrame(&IDLE_FRAME, IDLE_LENGTH);
   else IDLE_FRAME = NOT_ACTIVE;
 
-  TIME_FRAME = (millis()/100) % TIME_FRAME_LEN;
+  TIME_FRAME = (TIME_FRAME + 1) % TIME_FRAME_LEN;
 }
 
 void SpritePosController(){
@@ -192,7 +192,7 @@ void DrawScreen(){
     if (RUN_FRAME != NOT_ACTIVE) DrawSprite(RUN_ARR[RUN_FRAME], RUN_X, RUN_Y,
                                             pgm_read_byte_near(RUN_disp + (RUN_FRAME)*2), pgm_read_byte_near(RUN_disp + (RUN_FRAME)*2 + 1),
                                             pgm_read_byte_near(RUN_disp2 + RUN_FRAME),
-                                            KAHO_POS_X, KAHO_POS_Y,
+                                            KAHO_POS_X, KAHO_POS_Y + 2,
                                             is_left, 
                                             LINE_N);
     //Draw idle
