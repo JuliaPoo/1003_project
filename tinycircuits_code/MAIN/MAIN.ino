@@ -9,7 +9,7 @@
 
 TinyScreen display = TinyScreen(0);
 
-void setup (){
+void setup(){
   
   // Setup hardware
   Wire.begin();
