@@ -17,6 +17,9 @@ unsigned char LINEBUFFER[Rx];
 //###### SPRITE DATA ######
 //#########################
 
+const unsigned char HAMBURGER_MENU_XY[2] PROGMEM = {8, 6};
+const unsigned char HAMBURGER_MENU[8*6] PROGMEM = {255, 255, 255, 255, 255, 255, 255, 255, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 255, 255, 255, 255, 255, 255, 255, 255};
+
 const char RUN_disp[16] PROGMEM = {0, 0, 1, -1, 4, -1, 3, -1, 0, 0, 1, -1, 4, -1, 3, -1};
 const unsigned char RUN_XY[16] PROGMEM = {20, 25, 19, 26, 16, 25, 17, 24, 19, 25, 19, 26, 17, 25, 18, 24};
 const unsigned char RUN_0[500] PROGMEM = {ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 223, 223, 223, 223, 146, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 223, 223, 223, 223, 2, 1, 1, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 223, 223, 223, 2, 1, 1, 1, 1, 1, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 223, 223, 223, 1, 1, 51, 1, 1, 1, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 223, 223, 223, 223, 223, 1, 146, 146, 1, 1, 146, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 223, 223, 223, 223, 223, 1, 223, 223, 1, 1, 146, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 223, 223, 223, 223, 223, 1, 223, 223, 51, 51, 32, 146, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 146, 146, 146, 146, 146, 146, 2, 1, 1, 51, 32, 32, 146, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 146, 146, 146, 146, 146, 2, 1, 1, 1, 32, 146, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 2, 155, 2, 223, 223, 223, 223, 2, 2, 1, ALPHA, 155, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 155, 155, 51, 2, 223, 223, 223, 2, 2, 51, 155, 155, 155, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 155, 155, 146, 51, 2, 223, 223, 32, 32, 51, 51, 51, 155, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 155, 155, 146, 32, 32, 32, 32, 32, 32, ALPHA, ALPHA, 51, 51, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 32, 32, 32, 32, 32, 32, 32, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 32, 32, 32, 32, 32, 32, 32, 32, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 32, 32, 32, 32, 32, 32, 32, 32, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 32, 32, ALPHA, ALPHA, ALPHA, 51, 32, 32, 32, 32, 155, 32, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 32, 32, 2, 2, 2, ALPHA, 51, 51, 51, 51, 155, 155, 155, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 32, 2, ALPHA, 2, 2, 2, 2, 51, ALPHA, ALPHA, 155, 155, 2, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 2, 2, 2, ALPHA, ALPHA, ALPHA, ALPHA, 2, 2, 2, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 2, 2, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 2, 2, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 2, 2, ALPHA, 32, 32, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 2, 32, 32, 32, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 32, 32, ALPHA, ALPHA, ALPHA, ALPHA}; 
@@ -30,6 +33,7 @@ const unsigned char RUN_7[432] PROGMEM = {ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALP
 const long RUN_ARR[8] PROGMEM = {RUN_0, RUN_1, RUN_2, RUN_3, RUN_4, RUN_5, RUN_6, RUN_7};
 
 const char IDLE_disp[12] PROGMEM = {0, 0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0};
+const char IDLE_disp2[6] PROGMEM = {-1, 0, -2, -2, -2, -3};
 const unsigned char IDLE_XY[12] PROGMEM = {14, 26, 13, 26, 15, 26, 16, 26, 16, 26, 14, 26};
 const unsigned char IDLE_0[364] PROGMEM = {ALPHA, ALPHA, ALPHA, ALPHA, 223, 223, 223, 223, 2, 2, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 223, 223, 223, 2, 2, 1, 1, 1, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 223, 223, 2, 1, 1, 1, 1, 1, 1, ALPHA, ALPHA, ALPHA, ALPHA, 146, 223, 223, 32, 32, 32, 1, 32, 1, 1, 146, ALPHA, ALPHA, ALPHA, 223, 223, 2, 146, 146, 32, 51, 32, 1, 1, 146, ALPHA, ALPHA, 146, 223, 223, 1, 223, 223, 32, 155, 32, 51, 32, 32, ALPHA, 146, 146, 146, 146, 1, 1, 51, 155, 155, 155, 1, 32, 32, ALPHA, 146, 146, 146, 146, 146, 1, 1, 32, 32, 146, 1, 32, 146, ALPHA, ALPHA, ALPHA, ALPHA, 146, 223, 1, 223, 1, 2, 2, 223, 1, 1, ALPHA, ALPHA, ALPHA, ALPHA, 223, 223, 1, 223, 1, 2, 2, 223, 1, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 223, 223, 223, 223, 32, 32, 32, 223, 223, ALPHA, ALPHA, ALPHA, ALPHA, 146, 223, 223, 223, 223, 32, 32, 32, 223, 223, 223, ALPHA, ALPHA, ALPHA, 2, 2, 2, 223, 223, 32, 32, 32, 223, 223, 2, ALPHA, ALPHA, ALPHA, 51, 51, ALPHA, 32, 32, 32, 32, 32, 32, 51, 51, ALPHA, ALPHA, ALPHA, 155, 155, 32, 32, 32, 32, 32, 32, 32, 51, 51, ALPHA, ALPHA, 155, 155, 32, 32, 32, 32, 32, 32, 32, 32, 32, 51, 51, ALPHA, 155, 155, 32, 32, 32, 32, 32, 32, 32, 32, 32, 155, 155, 155, 155, 51, 32, 32, 32, 32, 32, 32, 32, 32, 32, 51, 155, ALPHA, ALPHA, ALPHA, ALPHA, 51, 51, 51, ALPHA, 51, 51, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 2, 51, 51, ALPHA, ALPHA, 51, 51, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 2, 2, ALPHA, ALPHA, ALPHA, 2, 2, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 2, 2, ALPHA, ALPHA, ALPHA, 2, 2, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 2, 2, ALPHA, ALPHA, ALPHA, ALPHA, 2, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 2, 2, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 2, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 32, 32, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 32, 32, ALPHA, ALPHA, ALPHA, ALPHA, 32, 32, 32, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 32, 32, 32, ALPHA, ALPHA, ALPHA}; 
 const unsigned char IDLE_1[338] PROGMEM = {ALPHA, ALPHA, ALPHA, ALPHA, 223, 223, 2, 2, 1, 1, 1, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 223, 223, 2, 1, 1, 1, 1, 1, 1, ALPHA, ALPHA, ALPHA, ALPHA, 223, 223, 1, 1, 1, 1, 51, 1, 1, ALPHA, ALPHA, ALPHA, 146, 223, 2, 32, 32, 32, 51, 32, 1, 1, 1, ALPHA, ALPHA, 223, 223, 2, 146, 146, 32, 51, 32, 1, 1, 146, ALPHA, 146, 223, 223, 1, 223, 223, 32, 155, 32, 51, 32, 32, 146, 146, 146, 146, 1, 1, 51, 155, 155, 155, 1, 32, 32, 146, 146, 146, 146, 146, 1, 1, 32, 32, 146, 1, 32, 146, ALPHA, ALPHA, ALPHA, 146, 223, 1, 223, 1, 2, 2, 223, 1, ALPHA, ALPHA, ALPHA, ALPHA, 223, 223, 223, 223, 223, 32, 223, 223, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 223, 223, 223, 223, 32, 32, 32, 223, 223, 223, ALPHA, ALPHA, 2, 2, 2, 223, 223, 32, 32, 32, 223, 223, 2, ALPHA, ALPHA, ALPHA, 51, 51, 32, 32, 32, 32, 32, 2, 2, 51, ALPHA, ALPHA, 155, 155, ALPHA, 32, 32, 32, 32, 32, 32, 51, 51, ALPHA, ALPHA, 155, 51, 32, 32, 32, 32, 32, 32, 32, 51, 51, ALPHA, 155, 155, 32, 32, 32, 32, 32, 32, 32, 32, 32, 155, ALPHA, 155, 155, 32, 32, 32, 32, 32, 32, 32, 32, 32, 155, ALPHA, ALPHA, ALPHA, 32, 32, 32, 51, 32, 51, 51, 51, 32, ALPHA, ALPHA, ALPHA, ALPHA, 2, 51, 51, ALPHA, ALPHA, 51, 51, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 2, 2, ALPHA, ALPHA, ALPHA, 2, 2, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 2, 2, ALPHA, ALPHA, ALPHA, 2, 2, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 2, 2, ALPHA, ALPHA, ALPHA, 2, 2, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 2, 2, ALPHA, ALPHA, ALPHA, ALPHA, 2, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 2, 2, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 2, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 32, 32, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 32, 32, ALPHA, ALPHA, ALPHA, 32, 32, 32, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 32, 32, 32, ALPHA, ALPHA}; 
@@ -121,11 +125,14 @@ void DrawScreen(){
   // Arrange sprite in increasing z-order
   
   // Initialise frame sizes
-  unsigned char RUN_X, RUN_Y, IDLE_X, IDLE_Y;
+  unsigned char RUN_X, RUN_Y, IDLE_X, IDLE_Y, HAM_X, HAM_Y;
   RUN_X = pgm_read_byte_near(RUN_XY + (RUN_FRAME)*2);
   RUN_Y = pgm_read_byte_near(RUN_XY + (RUN_FRAME)*2 + 1);
   IDLE_X = pgm_read_byte_near(IDLE_XY + (IDLE_FRAME)*2);
   IDLE_Y = pgm_read_byte_near(IDLE_XY + (IDLE_FRAME)*2 + 1);
+
+  HAM_X = pgm_read_byte_near(HAMBURGER_MENU_XY);
+  HAM_Y = pgm_read_byte_near(HAMBURGER_MENU_XY + 1);
 
   // Sets cursor
   display.setX(0, Rx-1);
@@ -144,16 +151,27 @@ void DrawScreen(){
     //Draw RUN
     if (RUN_FRAME != NOT_ACTIVE) DrawSprite(RUN_ARR[RUN_FRAME], RUN_X, RUN_Y,
                                             pgm_read_byte_near(RUN_disp + (RUN_FRAME)*2), pgm_read_byte_near(RUN_disp + (RUN_FRAME)*2 + 1),
+                                            0,
                                             KAHO_POS_X, KAHO_POS_Y,
                                             is_left, 
                                             LINE_N);
     //Draw idle
     if (IDLE_FRAME != NOT_ACTIVE) DrawSprite(IDLE_ARR[IDLE_FRAME], IDLE_X, IDLE_Y,
                                             pgm_read_byte_near(IDLE_disp + (IDLE_FRAME)*2), pgm_read_byte_near(IDLE_disp + (IDLE_FRAME)*2 + 1),
+                                            pgm_read_byte_near(IDLE_disp2 + IDLE_FRAME),
                                             KAHO_POS_X, KAHO_POS_Y,
                                             is_left, 
                                             LINE_N);
-                                            
+
+    // ----------------
+    // --- OVERLAYS ---
+    // ----------------
+    //Draw hamburger menu
+    DrawSprite(HAMBURGER_MENU, HAM_X, HAM_Y,
+              5, 10,
+              0, 0, 0,
+              false, 
+              LINE_N);
 
     display.writeBuffer(LINEBUFFER, Rx);
   }
@@ -162,6 +180,7 @@ void DrawScreen(){
 
 void DrawSprite(long SpritePointer, unsigned char SpriteSize_X,  unsigned char SpriteSize_Y,
                 char disp_x, char disp_y,
+                char disp_x2,
                 int x, int y,
                 bool reflect, 
                 unsigned char line_n){
@@ -174,18 +193,17 @@ void DrawSprite(long SpritePointer, unsigned char SpriteSize_X,  unsigned char S
   // reflect is whether to reflect along y axis
 
   y += disp_y;
-  if (reflect){
-    x -= disp_x;
-  } else x += disp_x;
+  if (!reflect) x += disp_x;
+  else x += disp_x2;
 
   if (line_n < y || line_n >= y + SpriteSize_Y){return;}
   
-  unsigned char pos, pixel;
+  int pos, pixel;
   for (pos = x; pos < x + SpriteSize_X; pos++){
     pixel = pgm_read_byte_near(SpritePointer + SpriteSize_X*(line_n - y) + pos - x);
     
     if (pixel != ALPHA){
-      if (reflect) LINEBUFFER[(SpriteSize_X - pos + 2*x)%Rx] = pixel;
+      if (reflect) LINEBUFFER[(2*x + SpriteSize_X - 1 - pos)%Rx] = pixel;
       else LINEBUFFER[pos%Rx] = pixel;
     }
   }
