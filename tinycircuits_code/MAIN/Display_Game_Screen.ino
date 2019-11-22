@@ -248,7 +248,7 @@ void DrawScreen(){
                    pgm_read_byte_near(TREE_disp + (frame)*2), pgm_read_byte_near(TREE_disp + (frame)*2 + 1),
                    0,
                    Rx/2 + i*155, Ry - 13, // 155 because 155 ~ Rx * \phi, the golden ratio. This makes the trees look random
-                   false, 
+                   false,
                    LINE_N);
       } else break;
     }
@@ -257,7 +257,7 @@ void DrawScreen(){
     if (LINE_N > Ry - 12) for (var = 0; var < Rx; var++) LINEBUFFER[var] = GROUND;
     DrawSprite(GRASS, GRASS_X, GRASS_Y, 
                0, 0, 0,
-               Rx/2 + KAHO_POS_X/10, Ry-13, 
+               Rx/2 + (int)(1.5*sin(TIME_FRAME*0.2 + 0.3)), Ry-13, // A touch of shake
                false, 
                LINE_N);
 
@@ -326,7 +326,13 @@ void DrawSprite(long SpritePointer, unsigned char SpriteSize_X,  unsigned char S
     pixel = pgm_read_byte_near(SpritePointer + SpriteSize_X*(line_n - y) + pos - x);
     
     if (pixel != ALPHA){
-      if (reflect) LINEBUFFER[(2*x + SpriteSize_X - 1 - pos)%Rx] = pixel;
+      
+      // (Rx - 1 - pos) is to fix a very specific bufferoverflow that occurs when
+      // Kaho is standing on a very specific pixel
+      // Facing left
+      // On a very specific sprite frame
+      
+      if (reflect) LINEBUFFER[(2*x + SpriteSize_X + (Rx - 1 - pos))%Rx] = pixel;
       else LINEBUFFER[pos%Rx] = pixel;
     }
   }
