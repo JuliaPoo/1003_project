@@ -7,10 +7,9 @@
 #include <Time.h>
 #include "const.h"
 
-#define TIMEOUT 30000 // Displays idle screen after 30s Only takes effect while in the game screen
-
 TinyScreen display = TinyScreen(0);
-long UseTime; // For Screen Saver
+
+long UseTime;
 
 void setup(){
   
@@ -29,25 +28,27 @@ void setup(){
   display.setBrightness(GetPreferences(0));
 
   UseTime = millis();
-  
 }
 
 
 void loop(){
 
-  // Draws game screen including the hamburger menu (avoid flickering at the expense of messy code)
-  Display_Game_Screen();
-
   // Checks to enter menu loop
+  // An if else for the game screen for performance of gamescreen
+  // There is already NO delay used in game screen yet it is still so laggy due to the other functions
+  
   if (is_clicked(TSButtonUpperLeft)){
     Menu_Loop();
-  }
+  } 
 
+  Display_Game();
+  
   if (millis() - UseTime > TIMEOUT) Idle_Loop(&UseTime);
 
   if (is_any_button()){
     UseTime = millis();
   }
-  
-  delay(50); // Whole app loop will have max fps=20
+
+  //If ever wanna for performance
+  delay(POWER_SAVING_LEVEL * 10);
 }
