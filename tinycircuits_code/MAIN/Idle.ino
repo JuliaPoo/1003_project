@@ -30,6 +30,5 @@ void Draw_Idle_Screen(int* miniclock, unsigned char* count){
   display.print(UwU);
 
   *count = (*count + 1) % 5;
-  Serial.println(*count);
   
 }

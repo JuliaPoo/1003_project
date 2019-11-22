@@ -15,7 +15,9 @@ unsigned char IS_FIRST; // If 0: store default values. Else continue with values
 typedef struct {
 
   unsigned char BRIGHTNESS;
-  unsigned char some_other_value;
+  unsigned char TIMEOUT;
+  unsigned char POWER_SAVING_LEVEL;
+  unsigned char temp; // Cuz memory size has to be even
   
 }PREFERENCES;
 
@@ -23,6 +25,8 @@ typedef struct {
 
   unsigned char EXP;
   unsigned char LEVEL;
+  unsigned char TasksCompleted;
+  unsigned char TasksFailed;
   
 }GAME_VARIABLES;
 
@@ -58,19 +62,25 @@ void FirstSetup(){
   GAME_VARIABLES game;
 
   pref.BRIGHTNESS = 15;
-  pref.some_other_value = 15;
+  pref.TIMEOUT = 30;
+  pref.POWER_SAVING_LEVEL = 0;
   game.EXP = 0;
   game.LEVEL = 1;
-
+  game.TasksCompleted = 0;
+  game.TasksFailed = 0;
+  
   // Set default values
   WritePreferences(pref.BRIGHTNESS, 0);
-  WritePreferences(pref.some_other_value, 1);
+  WritePreferences(pref.TIMEOUT, 1);
+  WritePreferences(pref.POWER_SAVING_LEVEL, 2);
   WriteTodo("Sample TODO #1", 0);
   WriteTodo("Sample TODO #2", 1);
   char temp[LEN_TODO] = "Testing a Really Long String";
   WriteTodo(temp, 2);
   WriteGameVariables(game.EXP, 0);
   WriteGameVariables(game.LEVEL, 1);
+  WriteGameVariables(game.TasksCompleted, 0);
+  WriteGameVariables(game.TasksFailed, 1);
   
   WriteIsFirst(1);
 }
@@ -90,7 +100,8 @@ unsigned char GetIsFirst(){
 
 unsigned char GetPreferences(unsigned char pos){
   // pos=0: gets brightness
-  // pos=1: gets some_other_value
+  // pos=1: gets TIMEOUT
+  // pos=2: gets POWER_SAVING_LEVEL
   // Returns the value in preference
   return EEPROM.read(pos + PREFERENCES_PTR);
 }
@@ -107,8 +118,10 @@ void GetTodo(char* output, unsigned char index){
 }
 
 unsigned char GetGameVariables(unsigned char pos){
-  // pos=1: Gets EXP
-  // pos=2: Gets LEVEL
+  // pos=0: Gets EXP
+  // pos=1: Gets LEVEL
+  // pos=2: Gets TasksCompleted
+  // pos=3: Gets TasksFailed
   // Returns the value in game variables
 
   return EEPROM.read(pos + GAME_VARIABLES_PTR);
@@ -145,5 +158,7 @@ void WriteGameVariables(unsigned char input, unsigned char pos){
   // Writes game variables into EEPROM
   // pos=0: writes EXP
   // pos=1: writes LEVEL
+  // pos=2: writes TasksCompleted
+  // pos=3: writes TasksFailed
   EEPROM.put(GAME_VARIABLES_PTR + pos, input);
 }

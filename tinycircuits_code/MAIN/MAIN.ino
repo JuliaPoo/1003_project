@@ -10,6 +10,15 @@
 TinyScreen display = TinyScreen(0);
 
 long UseTime;
+unsigned char BRIGHTNESS;
+int TIMEOUT;
+unsigned char POWER_SAVING_LEVEL;
+
+void GetEEPROMVars(){
+  BRIGHTNESS = GetPreferences(0);
+  TIMEOUT = GetPreferences(1) * 1000;
+  POWER_SAVING_LEVEL = GetPreferences(2);
+}
 
 void setup(){
   
@@ -25,9 +34,12 @@ void setup(){
   // Setup EEPROM
   Setup_Display_Loop(); // Asks user if they want to start a new game or continue from their previous session
   Setup_EEPROM();
-  display.setBrightness(GetPreferences(0));
+
+  GetEEPROMVars();
+  display.setBrightness(BRIGHTNESS);
 
   UseTime = millis();
+
 }
 
 
@@ -54,4 +66,5 @@ void loop(){
 
   //If ever wanna for performance
   delay(POWER_SAVING_LEVEL * 10);
+
 }
