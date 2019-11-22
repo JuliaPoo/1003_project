@@ -2,7 +2,7 @@
 // ####### MENU BAR #######
 // ########################
 
-#define N_OPTIONS 5               // Number of options on the menu
+#define N_OPTIONS 4               // Number of options on the menu
 
 #define BACKGROUND 219            // Background colour of unselected item
 #define SELECTED_BACKGROUND 182   // Background colour of selected item
@@ -55,7 +55,8 @@ void Menu_Loop(){
 void Draw_Menu(unsigned char y){
 
   // If need be, can be more memory efficient at the expense of cancer
-  char MenuOptions[N_OPTIONS][16] = {"To Do List", "Preferences", "Achievements", "Reset", "Back"};
+  // UPDATE: Had to remove "Achievements" because of memory :( Am sad.
+  char MenuOptions[N_OPTIONS][16] = {"To Do List", "Preferences", "Reset", "Back"};
   
   unsigned char i;
   char option[15];

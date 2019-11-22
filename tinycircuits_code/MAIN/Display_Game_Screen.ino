@@ -258,7 +258,7 @@ void DrawScreen(){
     if (LINE_N > Ry - 12) for (var = 0; var < Rx; var++) LINEBUFFER[var] = GROUND;
     DrawSprite(GRASS, GRASS_X, GRASS_Y, 
                0, 0, 0,
-               Rx/2 + (int)(1.5*sin(TIME_FRAME*0.2 + 0.3)), Ry-13, // A touch of shake
+               Rx/2 + (int)(.7*sin(TIME_FRAME*0.2 + 0.3) + .7), Ry-13, // A touch of shake
                false, 
                LINE_N);
 
