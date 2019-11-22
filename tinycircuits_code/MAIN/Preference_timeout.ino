@@ -50,7 +50,6 @@ void timeout_loop(){
   display.clearScreen();
   //Drawing UI for TimeOutLoop
   display.drawRect(0,0,95,64, TSRectangleFilled, TS_8b_White);
-  cross_button();
   display.drawLine(0,10, 96, 10, TS_8b_Black);
   //draw inner rect
   display.drawRect(6,15, 80, 38, TSRectangleFilled, TS_8b_Gray );
