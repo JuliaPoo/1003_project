@@ -54,6 +54,9 @@ void loop(){
   } 
 
   Display_Game();
+  if (is_clicked(TSButtonUpperRight)){
+    AddEXP(1);
+  }
   
   if (millis() - UseTime > TIMEOUT) Idle_Loop(&UseTime);
 

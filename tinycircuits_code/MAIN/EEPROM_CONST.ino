@@ -65,7 +65,7 @@ void FirstSetup(){
   pref.TIMEOUT = 30;
   pref.POWER_SAVING_LEVEL = 0;
   game.EXP = 0;
-  game.LEVEL = 1;
+  game.LEVEL = 0;
   game.TasksCompleted = 0;
   game.TasksFailed = 0;
   

@@ -90,7 +90,7 @@ void GetTreeState(unsigned char EXP){
   // What's a little inefficiency for readability eh?
   unsigned char i;
   for (i = 0; i < N_TREE; ++i){
-    if (TREE_STATE[i] != TREE_LENGTH-1) TREE_STATE[i] = NOT_ACTIVE;
+    TREE_STATE[i] = NOT_ACTIVE;
   }
 
   unsigned char FullyGrown = 0, temp = EXP;
