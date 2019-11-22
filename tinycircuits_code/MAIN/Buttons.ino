@@ -24,6 +24,6 @@ bool is_any_button(){
   if (display.getButtons(TSButtonUpperLeft) || 
       display.getButtons(TSButtonUpperRight)|| 
       display.getButtons(TSButtonLowerLeft) || 
-      display.getButtons(TSButtonUpperRight)) return true;
+      display.getButtons(TSButtonLowerRight)) return true;
   return false;
 }
