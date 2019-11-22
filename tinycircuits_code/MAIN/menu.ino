@@ -94,9 +94,8 @@ void Draw_Menu(unsigned char y){
 void ExecuteOption(unsigned char y){
   if (y == 0) ToDoList_Loop();
   else if (y == 1) Preference_Loop();
-  else if (y == 2) Achievements_Loop();
-  else if (y == 3) Reset_Loop();
-  else if (y == 4) Back();
+  else if (y == 2) Reset_Loop();
+  else if (y == 3) Back();
 }
 
 void ToDoList_Loop(){
