@@ -19,3 +19,11 @@ void button_loop(unsigned char button){
     if (!display.getButtons(button)) is_done = true;
   }
 }
+
+bool is_any_button(){
+  if (display.getButtons(TSButtonUpperLeft) || 
+      display.getButtons(TSButtonUpperRight)|| 
+      display.getButtons(TSButtonLowerLeft) || 
+      display.getButtons(TSButtonUpperRight)) return true;
+  return false;
+}

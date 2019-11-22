@@ -7,7 +7,10 @@
 #include <Time.h>
 #include "const.h"
 
+#define TIMEOUT 30000 // Displays idle screen after 30s Only takes effect while in the game screen
+
 TinyScreen display = TinyScreen(0);
+long UseTime; // For Screen Saver
 
 void setup(){
   
@@ -24,6 +27,8 @@ void setup(){
   Setup_Display_Loop(); // Asks user if they want to start a new game or continue from their previous session
   Setup_EEPROM();
   display.setBrightness(GetPreferences(0));
+
+  UseTime = millis();
   
 }
 
@@ -36,6 +41,12 @@ void loop(){
   // Checks to enter menu loop
   if (is_clicked(TSButtonUpperLeft)){
     Menu_Loop();
+  }
+
+  if (millis() - UseTime > TIMEOUT) Idle_Loop(&UseTime);
+
+  if (is_any_button()){
+    UseTime = millis();
   }
   
   delay(50); // Whole app loop will have max fps=20
