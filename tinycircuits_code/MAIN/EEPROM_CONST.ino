@@ -15,7 +15,7 @@ unsigned char IS_FIRST; // If 0: store default values. Else continue with values
 typedef struct {
 
   unsigned char BRIGHTNESS;
-  unsigned char TIMEOUT;
+  unsigned char TIMEOUT; // Given in multiples of 15s
   unsigned char POWER_SAVING_LEVEL;
   unsigned char temp; // Cuz memory size has to be even
   
@@ -62,7 +62,7 @@ void FirstSetup(){
   GAME_VARIABLES game;
 
   pref.BRIGHTNESS = 15;
-  pref.TIMEOUT = 30;
+  pref.TIMEOUT = 2;
   pref.POWER_SAVING_LEVEL = 0;
   game.EXP = 0;
   game.LEVEL = 0;

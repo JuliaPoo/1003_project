@@ -16,7 +16,7 @@ unsigned char POWER_SAVING_LEVEL;
 
 void GetEEPROMVars(){
   BRIGHTNESS = GetPreferences(0);
-  TIMEOUT = GetPreferences(1) * 1000;
+  TIMEOUT = GetPreferences(1) * 15000;
   POWER_SAVING_LEVEL = GetPreferences(2);
 }
 
@@ -51,9 +51,12 @@ void loop(){
   
   if (is_clicked(TSButtonUpperLeft)){
     Menu_Loop();
+    GetEEPROMVars();
+    UseTime = millis();
   } 
 
   Display_Game();
+  //if (is_clicked(TSButtonUpperRight)) AddEXP(1);
   
   if (millis() - UseTime > TIMEOUT) Idle_Loop(&UseTime);
 

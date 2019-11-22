@@ -102,7 +102,10 @@ void ToDoList_Loop(){
   UI_Todo_Loop(); // Launched To-do list
 }
 
-void Preference_Loop(){}
+void Preference_Loop(){
+  Preference_Menu_Loop();
+}
+
 void Achievements_Loop(){}
 
 void Reset_Loop(){
