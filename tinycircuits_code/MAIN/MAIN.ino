@@ -1,10 +1,11 @@
-#include <Wire.h>
+//#include <Wire.h>
 #include <SPI.h>
 #include <TinyScreen.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <Time.h>
+#include <STBLE.h>
 #include "const.h"
 
 TinyScreen display = TinyScreen(0);
@@ -23,7 +24,7 @@ void GetEEPROMVars(){
 void setup(){
   
   // Setup hardware
-  Wire.begin();
+  //Wire.begin();
   Serial.begin(9600);
   display.begin();
 

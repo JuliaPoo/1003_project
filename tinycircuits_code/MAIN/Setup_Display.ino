@@ -39,9 +39,9 @@ bool reset_confirmation(){
 
   display.clearScreen();
   
-  unsigned char width = display.getPrintWidth("Reset everything?");
+  unsigned char width = display.getPrintWidth("Reset?");
   display.setCursor(48-(width/2),Ry/2 - 5);
-  display.print("Reset everything?");
+  display.print("Reset?");
 
   display.setCursor(0, 0);
   display.print("Yes");

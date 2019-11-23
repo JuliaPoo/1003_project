@@ -1,6 +1,6 @@
 //Preferences Options
 #define N_OPTIONS 3
-char * options[16] = {"Set Brightness", "Set Timeout", "Power Saving"};
+char * options[3] = {"Set Brightness", "Set Timeout", "Power Saving"};
 char ** optionsPtr = options;
 
 //use to toggle brightnessBox -> brightness bar and set brightnessCount -> setBrightness() @ brightnessLoop.ino

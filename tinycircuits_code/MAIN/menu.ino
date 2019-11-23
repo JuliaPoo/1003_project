@@ -96,21 +96,10 @@ void Draw_Menu(unsigned char y){
 }
 
 void ExecuteOption(unsigned char y){
-  if (y == 0) ToDoList_Loop();
-  else if (y == 1) Preference_Loop();
+  if (y == 0) UI_Todo_Loop();
+  else if (y == 1) Preference_Menu_Loop();
   else if (y == 2) Reset_Loop();
-  else if (y == 3) Back();
 }
-
-void ToDoList_Loop(){
-  UI_Todo_Loop(); // Launched To-do list
-}
-
-void Preference_Loop(){
-  Preference_Menu_Loop();
-}
-
-void Achievements_Loop(){}
 
 void Reset_Loop(){
   display.fontColor(TS_8b_White, TS_8b_Black);
@@ -124,4 +113,3 @@ void Reset_Loop(){
   }
 }
 
-void Back(){}

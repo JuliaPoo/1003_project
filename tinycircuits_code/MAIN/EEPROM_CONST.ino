@@ -54,7 +54,6 @@ void clear_EEPROM(){
 }
 
 void FirstSetup(){
-  Serial.println("default");
   clear_EEPROM();
   
   // DEFAULT VALUES
@@ -64,23 +63,26 @@ void FirstSetup(){
   pref.BRIGHTNESS = 15;
   pref.TIMEOUT = 2;
   pref.POWER_SAVING_LEVEL = 0;
-  game.EXP = 0;
-  game.LEVEL = 0;
-  game.TasksCompleted = 0;
-  game.TasksFailed = 0;
+  
+  //game.EXP = 0;
+  //game.LEVEL = 0;
+  //game.TasksCompleted = 0;
+  //game.TasksFailed = 0;
   
   // Set default values
   WritePreferences(pref.BRIGHTNESS, 0);
   WritePreferences(pref.TIMEOUT, 1);
   WritePreferences(pref.POWER_SAVING_LEVEL, 2);
-  WriteTodo("Sample TODO #1", 0);
-  WriteTodo("Sample TODO #2", 1);
-  char temp[LEN_TODO] = "Testing a Really Long String";
-  WriteTodo(temp, 2);
-  WriteGameVariables(game.EXP, 0);
-  WriteGameVariables(game.LEVEL, 1);
-  WriteGameVariables(game.TasksCompleted, 0);
-  WriteGameVariables(game.TasksFailed, 1);
+  
+  //WriteTodo("Sample TODO #1", 0);
+  //WriteTodo("Sample TODO #2", 1);
+  //char temp[LEN_TODO] = "Testing a Really Long String";
+  //WriteTodo(temp, 2);
+  
+  //WriteGameVariables(game.EXP, 0);
+  //WriteGameVariables(game.LEVEL, 1);
+  //WriteGameVariables(game.TasksCompleted, 2);
+  //WriteGameVariables(game.TasksFailed, 3);
   
   WriteIsFirst(1);
 }

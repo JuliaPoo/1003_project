@@ -10,7 +10,7 @@ void Stats_Screen_Loop(){
   display.drawRect(9, 5, 73, 12, TSRectangleFilled, HEADER_COL);
 
   // Print header
-  char header[6][20] = {"Statistics", "Level: ", "Exp: ", "Trees: ", "Completed: ", "Failed: "};
+  char header[6][20] = {"Stats", "LVL: ", "EXP: ", "Trees: ", "Completed: ", "Failed: "};
   char text[6];
 
   itoa(GetGameVariables(1), text, 10);
