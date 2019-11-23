@@ -55,6 +55,10 @@ void loop(){
     UseTime = millis();
   } 
 
+  if (is_clicked(TSButtonUpperRight)){
+    Stats_Screen_Loop();
+  }
+
   Display_Game();
   //if (is_clicked(TSButtonUpperRight)) AddEXP(1);
   

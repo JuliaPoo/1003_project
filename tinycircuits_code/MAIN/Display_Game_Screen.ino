@@ -14,6 +14,9 @@ unsigned char LINEBUFFER[Rx];
 const unsigned char HAMBURGER_MENU_XY[2] PROGMEM = {8, 6};
 const unsigned char HAMBURGER_MENU[8*6] PROGMEM = {255, 255, 255, 255, 255, 255, 255, 255, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 255, 255, 255, 255, 255, 255, 255, 255};
 
+const unsigned char INFO_ICON_XY[2] PROGMEM = {8,9};
+const unsigned char INFO_ICON[8*9] PROGMEM = {ALPHA, ALPHA, 209, 209, 209, 209, ALPHA, ALPHA, ALPHA, 209, 209, 209, 209, 209, 209, ALPHA, 209, 209, 209, 209, 209, 209, 209, 209, 209, 209, 209, 255, 209, 209, 209, 209, 209, 209, 209, 209, 209, 209, 209, 209, 209, 209, 209, 209, 209, 209, 209, 209, 176, 209, 209, 255, 255, 209, 209, 176, ALPHA, 176, 209, 209, 209, 209, 176, ALPHA, ALPHA, ALPHA, ALPHA, 176, 176, ALPHA, ALPHA, ALPHA};
+
 const char RUN_disp[16] PROGMEM = {0, 0, 1, -1, 4, -1, 3, -1, 0, 0, 1, -1, 4, -1, 3, -1};
 const char RUN_disp2[8] PROGMEM = {4, 4, 4, 4, 4, 4, 3, 3};
 const unsigned char RUN_XY[16] PROGMEM = {15, 19, 14, 20, 11, 19, 12, 19, 15, 19, 14, 20, 12, 19, 13, 19};
@@ -80,7 +83,7 @@ unsigned char TIME_FRAME = 0;
 //-------------------
 
 #define TREE_LENGTH 5
-#define N_TREE 5
+#define N_TREE 20
 unsigned char TREE_STATE[N_TREE];
 
 void GetTreeState(unsigned char EXP){
@@ -195,7 +198,7 @@ void DrawScreen(){
   // Arrange sprite in increasing z-order
   
   // Initialise frame sizes
-  unsigned char RUN_X, RUN_Y, IDLE_X, IDLE_Y, CLOUD1_X, CLOUD1_Y, GRASS_X, GRASS_Y, HAM_X, HAM_Y;
+  unsigned char RUN_X, RUN_Y, IDLE_X, IDLE_Y, CLOUD1_X, CLOUD1_Y, GRASS_X, GRASS_Y, HAM_X, HAM_Y, INFO_X, INFO_Y;
   RUN_X = pgm_read_byte_near(RUN_XY + (RUN_FRAME)*2);
   RUN_Y = pgm_read_byte_near(RUN_XY + (RUN_FRAME)*2 + 1);
   IDLE_X = pgm_read_byte_near(IDLE_XY + (IDLE_FRAME)*2);
@@ -208,6 +211,8 @@ void DrawScreen(){
 
   HAM_X = pgm_read_byte_near(HAMBURGER_MENU_XY);
   HAM_Y = pgm_read_byte_near(HAMBURGER_MENU_XY + 1);
+  INFO_X = pgm_read_byte_near(INFO_ICON_XY);
+  INFO_Y = pgm_read_byte_near(INFO_ICON_XY + 1);
 
   // Sets cursor
   display.setX(0, Rx-1);
@@ -288,6 +293,13 @@ void DrawScreen(){
     //Draw hamburger menu
     DrawSprite(HAMBURGER_MENU, HAM_X, HAM_Y,
               5, 10,
+              0, 0, 0,
+              false, 
+              LINE_N);
+
+    //Draw info icon
+    DrawSprite(INFO_ICON, INFO_X, INFO_Y,
+              Rx-13, 10,
               0, 0, 0,
               false, 
               LINE_N);

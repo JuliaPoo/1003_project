@@ -46,6 +46,10 @@ void Menu_Loop(){
       ExecuteOption(y);
       is_done = true;
     }
+
+    if (is_clicked(TSButtonUpperRight)){
+      is_done = true;
+    }
   }
   
   // Change font back

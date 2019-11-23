@@ -1,6 +1,7 @@
 void Idle_Loop(long* UseTime){
   
   bool is_done = false;
+  display.fontColor(TS_8b_White, TS_8b_Black);
 
   int miniclock = 0;
   unsigned char count = 0;
