@@ -58,7 +58,7 @@ void FirstSetup(){
   
   // DEFAULT VALUES
   PREFERENCES pref;
-  GAME_VARIABLES game;
+  //GAME_VARIABLES game;
 
   pref.BRIGHTNESS = 15;
   pref.TIMEOUT = 2;
