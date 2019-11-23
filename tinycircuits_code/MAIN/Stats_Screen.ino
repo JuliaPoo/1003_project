@@ -31,6 +31,9 @@ void Stats_Screen_Loop(){
   }
 
   while (!is_done){
-    if (is_any_button()) is_done = true;
+    if (is_any_button()){
+      while(is_any_button()){}
+      is_done = true;
+    }
   }
 }
