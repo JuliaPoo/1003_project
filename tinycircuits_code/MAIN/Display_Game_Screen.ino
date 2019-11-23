@@ -299,7 +299,7 @@ void DrawScreen(){
 
     //Draw info icon
     DrawSprite(INFO_ICON, INFO_X, INFO_Y,
-              Rx-13, 10,
+              Rx-13, 7,
               0, 0, 0,
               false, 
               LINE_N);
