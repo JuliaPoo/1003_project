@@ -32,14 +32,14 @@ void convert_int_to_str(int s){
     strcat(output, " Sec");
     display.print(output);
     }
-    else{
-      int x = s / 4;
-      itoa(x, convert, 10);
-      strcat(output, convert);
-      strcat(output, " Min");
-      display.print(output);
-      }
-  }
+  else{
+    int x = s / 4;
+    itoa(x, convert, 10);
+    strcat(output, convert);
+    strcat(output, " Min");
+    display.print(output);
+    }
+}
 
 
 //-------------------//
@@ -64,18 +64,12 @@ void timeout_loop(){
   //Loop Starts Here
   while(timeout = '0'){
     if(is_clicked(TSButtonUpperRight)){
-      if(*timeOutPtr == 20)
-        timeOutPtr = &T_O_Value[0];
-      else
-        timeOutPtr++;
+      timeOutPtr = (timeOutPtr - T_O_Value + 1) % 6 + T_O_Value;
       display.drawRect(13,20, 40, 20, TSRectangleFilled, TS_8b_Gray );
       convert_int_to_str(*timeOutPtr);
     }
     if(is_clicked(TSButtonLowerRight)){
-      if(*timeOutPtr == 1)
-        timeOutPtr = &T_O_Value[5];
-      else
-        timeOutPtr--;
+      timeOutPtr = (timeOutPtr - T_O_Value + 5) % 6 + T_O_Value;
       display.drawRect(13,20, 40, 20, TSRectangleFilled, TS_8b_Gray );
       convert_int_to_str(*timeOutPtr);
     }
