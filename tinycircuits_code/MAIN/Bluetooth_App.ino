@@ -50,7 +50,13 @@ bool GetTaskFromBluetooth(){
   BLEsetup();
 
   char text[20];
-  while (!ble_connection_state){aci_loop();} // Wait to be connected to
+  while (!ble_connection_state){
+    aci_loop();
+    if (is_any_button()){
+      while (is_any_button()){}
+      return false;
+    }
+  } // Wait to be connected to
 
   delay(2000);
   
