@@ -5,9 +5,9 @@
 void Stats_Screen_Loop(){
   bool is_done = false;
 
-  display.drawRect(14+2, 5+2, 63, 86, TSRectangleFilled, MENU_SHADOW);
-  display.drawRect(14, 5, 63, 86, TSRectangleFilled, MENU_COL);
-  display.drawRect(14, 5, 63, 11, TSRectangleFilled, HEADER_COL);
+  display.drawRect(9+2, 5+2, 73, 86, TSRectangleFilled, MENU_SHADOW);
+  display.drawRect(9, 5, 73, 86, TSRectangleFilled, MENU_COL);
+  display.drawRect(9, 5, 73, 12, TSRectangleFilled, HEADER_COL);
 
   // Print header
   char header[6][20] = {"Statistics", "Level: ", "Exp: ", "Trees: ", "Completed: ", "Failed: "};
