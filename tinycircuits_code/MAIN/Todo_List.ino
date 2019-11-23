@@ -127,7 +127,7 @@ void show_text(short int selector, short int pos_in_page){
   unsigned char first = max(0, selector - pos_in_page);
   unsigned char last = min(TASKS_STORAGE_MAX - 1, selector + (ELEMENTS_PER_PAGE - pos_in_page) + 1);
 
-  bool is_truncated;
+  bool is_truncated, is_plus = true;
   char text[LINES_LENGTH];
   char temp[LINES_LENGTH];
   short int i, row = 0;
@@ -135,10 +135,15 @@ void show_text(short int selector, short int pos_in_page){
 
     GetTodo(temp, i);
     truncate_text(text, temp, 0, 84, &is_truncated);
+
+    if (strlen(text) == 0 && is_plus){
+      strcpy(text, " +");
+    }
     
     display.setCursor(3, 11 + 10 * row);
     if (selector == i) print_line(text, SELECTED_TEXT_BG, 0);
     else print_line(text, NORMAL_TEXT_BG, 0);
+
     ++row;
   }
 }
@@ -153,70 +158,96 @@ void display_menu(short int selector, short int pos_in_page){
   show_text(selector, pos_in_page);
 }
 
-void popup_buttons(int yes){
-  if (yes == 1){
-    display.setCursor(19, 25);
-    print_line(" Yes! ", SELECTED_TEXT_BG, 0);
-    display.setCursor(19, 37);
-    print_line(" Not yet. ", NORMAL_TEXT_BG, 0);
-  } 
-  if (yes == 0){
-    display.setCursor(19, 25);
-    print_line(" Yes! ", NORMAL_TEXT_BG, 0);
-    display.setCursor(19, 37);
-    print_line(" Not yet. ", SELECTED_TEXT_BG, 0);
+void popup_buttons(int menu_index){
+  char options[4][11] = {"Back", "Delete", "Completed", "Failed"};
+  
+  unsigned char i, y=15;
+  for (i = 0; i < 4; ++i){
+    
+    display.setCursor(Rx/2 - display.getPrintWidth(options[i])/2 - 3, y);
+    if (i == menu_index) print_line(options[i], NORMAL_TEXT_BG, 0);
+    else print_line(options[i], POPUP_BACKGROUND_COL, 0);
+
+    y += 11;
   }
+}
+
+void add_task_popup(){
+  bool is_done = false;
+  bool success;
+
+  // colour whole inner menu partially
+  display.drawRect(13, 12, 65, 49, 0, 0); // Outline
+  display.drawRect(14, 13, 63, 47, TSRectangleFilled, POPUP_BACKGROUND_COL);
+
+  // Print header
+  char header[3][20] = {"Connect with", "Bluetooth", "..."};
+
+  for (unsigned char i = 0; i < 3; ++i){
+    display.setCursor(Rx/2 - display.getPrintWidth(header[i])/2 - 4, 15 + 10*i);
+    print_line(header[i], POPUP_BACKGROUND_COL, 0);
+  }
+
+  success = GetTaskFromBluetooth();
+
+  char text[20];
+  if (success) strcpy(text, "Success!");
+  else strcpy(text, "Failed");
+  display.setCursor(Rx/2 - display.getPrintWidth(text)/2 - 4, 45);
+  print_line(text, POPUP_BACKGROUND_COL, 0);
+
+  delay(1000); // Allow the user to read the success status
 }
 
 void open_popupbox(int select_index){
   char popup_loop_end = '0';
-  char temp[LINES_LENGTH];
   // colour whole inner menu partially
-  display.drawRect(13, 12, 65, 41, 0, 0); // Outline
-  display.drawRect(14, 13, 63, 39, TSRectangleFilled, POPUP_BACKGROUND_COL);
-  display.setCursor(14, 13);
-  print_line("Finish task?", POPUP_BACKGROUND_COL, 0);
-  
-  short int complete_task = 0;
-  popup_buttons(complete_task);
+  display.drawRect(13, 12, 65, 49, 0, 0); // Outline
+  display.drawRect(14, 13, 63, 47, TSRectangleFilled, POPUP_BACKGROUND_COL);
+  //display.setCursor(14, 13);
+  //print_line("Finish task?", POPUP_BACKGROUND_COL, 0);
+
+  short int menu_index = 0;
+  popup_buttons(menu_index);
   
   while (popup_loop_end == '0'){
-      if (is_clicked(TSButtonUpperLeft)){
-        if (complete_task == 1){
-          complete_task = 0;
-        } else if (complete_task == 0){
-          complete_task = 1;
-        }
-        popup_buttons(complete_task);
+    
+    // Modifies menu pointer
+    if (is_clicked(TSButtonUpperLeft)){
+      menu_index = (menu_index + 3) % 4;
+      popup_buttons(menu_index);
+    }
+    if (is_clicked(TSButtonLowerLeft)){
+      menu_index = (menu_index + 1) % 4;
+      popup_buttons(menu_index);
+    }
+
+    // Executes
+    if (is_clicked(TSButtonUpperRight)) break;
+    if (is_clicked(TSButtonLowerRight)){
+      if (menu_index == 0) break;
+      else {
+        deleteTask(select_index);
+
+        if (menu_index == 2) CompletedTask();
+        else if (menu_index == 3) FailedTask();
+        
+        break;
       }
-      if (is_clicked(TSButtonLowerLeft)){
-        if (complete_task == 1){
-          complete_task = 0;
-        } else if (complete_task == 0){
-          complete_task = 1;
-        }
-        popup_buttons(complete_task);
-      }
-      if (is_clicked(TSButtonUpperRight)){
-        break;  
-      }
-      if (is_clicked(TSButtonLowerRight)){
-        if (complete_task == 0){
-          break;
-        }
-        if (complete_task == 1){
-        // delete the entry, mark as complete and rearrange.
-          WriteTodo("\0", select_index);
-          int counter;
-          for (counter = 0; counter < TASKS_STORAGE_MAX; counter++){
-            if (counter > select_index){
-              GetTodo(temp, counter);
-              WriteTodo(temp, counter-1);
-            }
-          }
-          break;
-        }
-      }
+    }
+  }
+}
+
+void deleteTask(int select_index){
+  // Delete and rearrange tasks (Did not use linked list because memory)
+  char temp[LINES_LENGTH];
+  WriteTodo("\0", select_index);
+  int counter;
+  for (counter = 0; counter < TASKS_STORAGE_MAX; counter++){
+    if (counter > select_index){
+      GetTodo(temp, counter);
+      WriteTodo(temp, counter-1);
+    }
   }
 }
 
@@ -240,11 +271,7 @@ void animate_text_loop(short int selector, short int pos_in_page){
       ++ truncate;
       
     }
-    if (display.getButtons(TSButtonUpperLeft) || 
-        display.getButtons(TSButtonUpperRight)|| 
-        display.getButtons(TSButtonLowerLeft) || 
-        display.getButtons(TSButtonUpperRight)){
-          
+    if (is_any_button()){
       is_done = true;
     }
 
@@ -256,6 +283,7 @@ void animate_text_loop(short int selector, short int pos_in_page){
 
 void button_controller_loop(short int *selector, short int *pos_in_page){
   bool is_done = false;
+  char text[LINES_LENGTH];
 
   while (!is_done){
     if (is_clicked(TSButtonUpperLeft)){
@@ -283,7 +311,16 @@ void button_controller_loop(short int *selector, short int *pos_in_page){
     }
 
     if (is_clicked(TSButtonLowerRight)){
-      open_popupbox(*selector);
+
+      GetTodo(text, *selector);
+
+      if (strlen(text) == 0){
+        add_task_popup();
+      }
+      else {
+        open_popupbox(*selector);
+      }
+
       display_menu(*selector, *pos_in_page);
       is_done = true;
     }

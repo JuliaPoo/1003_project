@@ -9,6 +9,7 @@ unsigned char LINEBUFFER[Rx];
 //#########################
 //###### SPRITE DATA ######
 //#########################
+// Not enough space to add my kitties :(
 
 const unsigned char HAMBURGER_MENU_XY[2] PROGMEM = {8, 6};
 const unsigned char HAMBURGER_MENU[8*6] PROGMEM = {255, 255, 255, 255, 255, 255, 255, 255, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, ALPHA, 255, 255, 255, 255, 255, 255, 255, 255};
