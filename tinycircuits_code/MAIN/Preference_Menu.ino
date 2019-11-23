@@ -22,21 +22,6 @@ void print_header(char* s){
   display.print(s);
 }
 
-void cross_button(){
-  display.drawRect(84, 0, 11, 11, TSRectangleFilled, 158, 134, 200);
-  //the x on the out
-  // x, y, color
-  display.drawPixel(85, 1, TS_8b_White);display.drawPixel(93, 1, TS_8b_White);
-  display.drawPixel(86, 2, TS_8b_White);display.drawPixel(92, 2, TS_8b_White);
-  display.drawPixel(87, 3, TS_8b_White);display.drawPixel(91, 3, TS_8b_White);
-  display.drawPixel(88, 4, TS_8b_White);display.drawPixel(90, 4, TS_8b_White);
-  display.drawPixel(89, 5, TS_8b_White);
-  display.drawPixel(88, 6, TS_8b_White);display.drawPixel(90, 6, TS_8b_White);
-  display.drawPixel(87, 7, TS_8b_White);display.drawPixel(91, 7, TS_8b_White);
-  display.drawPixel(86, 8, TS_8b_White);display.drawPixel(92, 8, TS_8b_White);
-  display.drawPixel(85, 9, TS_8b_White);display.drawPixel(93, 9, TS_8b_White);
-  }
-
 //Set all available options for Settings
 void set_options()
 {
@@ -81,7 +66,7 @@ void drawSettingsMenu(){
   display.drawRect(0, 0, 95, 64, TSRectangleFilled, TS_8b_White);
   display.setCursor(25,0);
   print_header("Settings");
-  cross_button();
+  out_box();
   //draw line
   display.drawLine(0,10, 96, 10, TS_8b_Black);
   //draw inner rect

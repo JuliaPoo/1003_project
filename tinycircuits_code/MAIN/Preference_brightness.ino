@@ -4,15 +4,18 @@ void draw_brightness_fillbox(int s){
 
 //just a previous arrow
 void draw_arrow(){
-  display.drawPixel(0,59, TS_8b_Black);
-  display.drawPixel(1,58, TS_8b_Black);display.drawPixel(1,59, TS_8b_Black);display.drawPixel(1,60, TS_8b_Black);
-  display.drawPixel(2,57, TS_8b_Black);display.drawPixel(2,58, TS_8b_Black);display.drawPixel(2,59, TS_8b_Black);display.drawPixel(2,60, TS_8b_Black);display.drawPixel(2,61, TS_8b_Black);
-  display.drawPixel(3,56, TS_8b_Black);display.drawPixel(3,57, TS_8b_Black);display.drawPixel(3,58, TS_8b_Black);display.drawPixel(3,59, TS_8b_Black);display.drawPixel(3,60, TS_8b_Black);display.drawPixel(3,61, TS_8b_Black);display.drawPixel(3,62, TS_8b_Black);
-  display.drawPixel(4,55, TS_8b_Black);display.drawPixel(4,56, TS_8b_Black);display.drawPixel(4,57, TS_8b_Black);display.drawPixel(4,58, TS_8b_Black);display.drawPixel(4,59, TS_8b_Black);display.drawPixel(4,60, TS_8b_Black);display.drawPixel(4,61, TS_8b_Black);display.drawPixel(4,62, TS_8b_Black);display.drawPixel(4,63, TS_8b_Black);
+  unsigned char i,k;
+  for (i = 0; i<=5; ++i){
+    for (k = 0; k <= i; ++k){
+      display.drawPixel(i, 59-i+k, TS_8b_Black);
+      display.drawPixel(i, 59+i-k, TS_8b_Black);
+    }
+  }
+
   display.setCursor(5,54);
   display.fontColor(TS_8b_Black, TS_8b_White);
   print_header("Previous");
-  }  
+}  
 
 //draw brightness bar
 void drawBBox(){

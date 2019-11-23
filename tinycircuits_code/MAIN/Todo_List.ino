@@ -38,18 +38,6 @@ void print_line(char* s, unsigned char text_col, unsigned char background_col){
    display.print(s);
 }
 
-void arrow_up_normal(unsigned char col){
-  display.drawRect(4, 2, 1, 2, TSRectangleFilled, col);
-  display.drawRect(3, 4, 3, 2, TSRectangleFilled, col);
-  display.drawRect(2, 6, 5, 2, TSRectangleFilled, col);
-  display.drawRect(1, 8, 7, 2, TSRectangleFilled, col);
-  }
-void arrow_down_normal(unsigned char col){
-  display.drawRect(1, 53, 7, 2, TSRectangleFilled, col);
-  display.drawRect(2, 55, 5, 2, TSRectangleFilled, col);
-  display.drawRect(3, 57, 3, 2, TSRectangleFilled, col);
-  display.drawRect(4, 59, 1, 2, TSRectangleFilled, col);
-}
 void out_box(){
   display.drawRect(84, 0, 11, 11, TSRectangleFilled, 158, 134, 200);
   //the x on the out
@@ -84,8 +72,6 @@ void init_UI(){
   print_line("To-do list", MENU_BACKGROUND_COL, 0);
 
   // arrow up and down
-  arrow_up_normal(MENU_ARROW_COL);
-  arrow_down_normal(MENU_ARROW_COL);
   out_box();
   sel_box();
 }
