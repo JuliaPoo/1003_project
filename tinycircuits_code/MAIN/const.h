@@ -3,7 +3,7 @@
 // ################################
 
 #define N_TODO 20     // max number of to do to store
-#define LEN_TODO 32   // max length of each todo (not inclusive of the \0 char)
+#define LEN_TODO 22   // max length of each todo (not inclusive of the \0 char)
 #define Rx 96         // Screen resolution x
 #define Ry 64         // Screen resolution y
 
