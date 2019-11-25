@@ -17,6 +17,12 @@ void slice_str(char * buff, const char * str, size_t start, size_t end){
   buff[j] = 0;
 }
 
+
+
+// ********************************
+//  drawCircle written by Ben Rose
+// ********************************
+
 void drawCircle(int x0, int y0, int radius, uint8_t color){
   int x = radius; int y = 0; int radiusError = 1-x;
   while(x >= y){
