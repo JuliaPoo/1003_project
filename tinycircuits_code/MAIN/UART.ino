@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 
+
 volatile uint8_t set_connectable = 1;
 uint16_t connection_handle = 0;
 
@@ -28,6 +29,7 @@ int BLEsetup() {
   ret = aci_hal_write_config_data(CONFIG_DATA_PUBADDR_OFFSET, CONFIG_DATA_PUBADDR_LEN, bdaddr);
 
   ret = aci_gatt_init();
+
 
   uint16_t service_handle, dev_name_char_handle, appearance_char_handle;
   ret = aci_gap_init_IDB05A1(GAP_PERIPHERAL_ROLE_IDB05A1, 0, 0x07, &service_handle, &dev_name_char_handle, &appearance_char_handle);
