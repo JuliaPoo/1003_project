@@ -79,7 +79,7 @@ void FirstSetup(){
   //char temp[LEN_TODO] = "Testing a Really Long String";
   //WriteTodo(temp, 2);
   
-  //WriteGameVariables(game.EXP, 0);
+  //WriteGameVariables((unsigned char)50, 0);
   //WriteGameVariables(game.LEVEL, 1);
   //WriteGameVariables(game.TasksCompleted, 2);
   //WriteGameVariables(game.TasksFailed, 3);

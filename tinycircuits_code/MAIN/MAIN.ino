@@ -25,7 +25,7 @@ void setup(){
   
   // Setup hardware
   //Wire.begin();
-  Serial.begin(9600);
+  //Serial.begin(9600);
   display.begin();
 
   // Set font
@@ -61,7 +61,7 @@ void loop(){
   }
 
   Display_Game();
-  //if (is_clicked(TSButtonUpperRight)) AddEXP(1);
+  //if (millis()/10 % 100) AddEXP(1);
   
   if (millis() - UseTime > TIMEOUT) Idle_Loop(&UseTime);
 

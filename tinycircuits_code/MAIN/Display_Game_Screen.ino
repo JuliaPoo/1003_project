@@ -196,23 +196,6 @@ void Display_Game() {
 
 void DrawScreen(){
   // Arrange sprite in increasing z-order
-  
-  // Initialise frame sizes
-  unsigned char RUN_X, RUN_Y, IDLE_X, IDLE_Y, CLOUD1_X, CLOUD1_Y, GRASS_X, GRASS_Y, HAM_X, HAM_Y, INFO_X, INFO_Y;
-  RUN_X = pgm_read_byte_near(RUN_XY + (RUN_FRAME)*2);
-  RUN_Y = pgm_read_byte_near(RUN_XY + (RUN_FRAME)*2 + 1);
-  IDLE_X = pgm_read_byte_near(IDLE_XY + (IDLE_FRAME)*2);
-  IDLE_Y = pgm_read_byte_near(IDLE_XY + (IDLE_FRAME)*2 + 1);
-
-  CLOUD1_X = pgm_read_byte_near(CLOUD1_XY);
-  CLOUD1_Y = pgm_read_byte_near(CLOUD1_XY + 1);
-  GRASS_X = pgm_read_byte_near(GRASS_XY);
-  GRASS_Y = pgm_read_byte_near(GRASS_XY + 1);
-
-  HAM_X = pgm_read_byte_near(HAMBURGER_MENU_XY);
-  HAM_Y = pgm_read_byte_near(HAMBURGER_MENU_XY + 1);
-  INFO_X = pgm_read_byte_near(INFO_ICON_XY);
-  INFO_Y = pgm_read_byte_near(INFO_ICON_XY + 1);
 
   // Sets cursor
   display.setX(0, Rx-1);
@@ -230,13 +213,13 @@ void DrawScreen(){
     // ----------------------
 
     //Draw Clouds
-    DrawSprite(CLOUD1, CLOUD1_X, CLOUD1_Y,
+    DrawSprite(CLOUD1, pgm_read_byte_near(CLOUD1_XY), pgm_read_byte_near(CLOUD1_XY + 1),
               0, 0, 0,
               (unsigned char)(2*Rx*((float)(TIME_FRAME_LEN-TIME_FRAME)/TIME_FRAME_LEN)), 15, 
               false,
               LINE_N);
               
-    DrawSprite(CLOUD1, CLOUD1_X, CLOUD1_Y, 
+    DrawSprite(CLOUD1, pgm_read_byte_near(CLOUD1_XY), pgm_read_byte_near(CLOUD1_XY + 1), 
                0, 0, 0, 
                (unsigned char)(Rx*((float)(TIME_FRAME_LEN-TIME_FRAME)/TIME_FRAME_LEN) + 50), 25, 
                false,
@@ -250,7 +233,7 @@ void DrawScreen(){
         DrawSprite(TREE_ARR[frame], pgm_read_byte_near(TREE_XY + (frame)*2), pgm_read_byte_near(TREE_XY + (frame)*2 + 1), 
                    pgm_read_byte_near(TREE_disp + (frame)*2), pgm_read_byte_near(TREE_disp + (frame)*2 + 1),
                    0,
-                   Rx/2 + i*155, Ry - 15, // 155 because 155 ~ Rx * \phi, the golden ratio. This makes the trees look random
+                   Rx/2 + i*155, Ry - 15 - (int)(.7*sin(TIME_FRAME*0.2 + 0.3  + i*6.28*1.68) + .7), // 155 because 155 ~ Rx * \phi, the golden ratio. This makes the trees look random
                    false,
                    LINE_N);
       } else break;
@@ -258,7 +241,7 @@ void DrawScreen(){
     
     //Draw Ground
     if (LINE_N > Ry - 12) for (var = 0; var < Rx; var++) LINEBUFFER[var] = GROUND;
-    DrawSprite(GRASS, GRASS_X, GRASS_Y, 
+    DrawSprite(GRASS, pgm_read_byte_near(GRASS_XY), pgm_read_byte_near(GRASS_XY + 1), 
                0, 0, 0,
                Rx/2 + (int)(.7*sin(TIME_FRAME*0.2 + 0.3) + .7), Ry-13, // A touch of shake
                false, 
@@ -270,14 +253,14 @@ void DrawScreen(){
     // -------------------
     
     //Draw RUN
-    if (RUN_FRAME != NOT_ACTIVE) DrawSprite(RUN_ARR[RUN_FRAME], RUN_X, RUN_Y,
+    if (RUN_FRAME != NOT_ACTIVE) DrawSprite(RUN_ARR[RUN_FRAME], pgm_read_byte_near(RUN_XY + (RUN_FRAME)*2), pgm_read_byte_near(RUN_XY + (RUN_FRAME)*2 + 1),
                                             pgm_read_byte_near(RUN_disp + (RUN_FRAME)*2), pgm_read_byte_near(RUN_disp + (RUN_FRAME)*2 + 1),
                                             pgm_read_byte_near(RUN_disp2 + RUN_FRAME),
                                             KAHO_POS_X, KAHO_POS_Y + 2,
                                             is_left, 
                                             LINE_N);
     //Draw idle
-    if (IDLE_FRAME != NOT_ACTIVE) DrawSprite(IDLE_ARR[IDLE_FRAME], IDLE_X, IDLE_Y,
+    if (IDLE_FRAME != NOT_ACTIVE) DrawSprite(IDLE_ARR[IDLE_FRAME], pgm_read_byte_near(IDLE_XY + (IDLE_FRAME)*2), pgm_read_byte_near(IDLE_XY + (IDLE_FRAME)*2 + 1),
                                             pgm_read_byte_near(IDLE_disp + (IDLE_FRAME)*2), pgm_read_byte_near(IDLE_disp + (IDLE_FRAME)*2 + 1),
                                             pgm_read_byte_near(IDLE_disp2 + IDLE_FRAME),
                                             KAHO_POS_X, KAHO_POS_Y,
@@ -288,17 +271,15 @@ void DrawScreen(){
     // --- OVERLAYS ---
     // ----------------
 
-    //if (LINE_N < 6+11 && LINE_N > 6) for (var = 4; var < 14; var++) LINEBUFFER[var] = 183;
-    
     //Draw hamburger menu
-    DrawSprite(HAMBURGER_MENU, HAM_X, HAM_Y,
+    DrawSprite(HAMBURGER_MENU, pgm_read_byte_near(HAMBURGER_MENU_XY), pgm_read_byte_near(HAMBURGER_MENU_XY + 1),
               5, 10,
               0, 0, 0,
               false, 
               LINE_N);
 
     //Draw info icon
-    DrawSprite(INFO_ICON, INFO_X, INFO_Y,
+    DrawSprite(INFO_ICON, pgm_read_byte_near(INFO_ICON_XY), pgm_read_byte_near(INFO_ICON_XY + 1),
               Rx-13, 7,
               0, 0, 0,
               false, 
